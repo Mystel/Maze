@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from pygame import mixer
 import pygame.midi as midi
 
 
@@ -80,8 +79,6 @@ def main():
     # test - rectangle
     gameboard = GameBoard()
 
-
-
     # event loop
     while 1:
         for event in pygame.event.get():
@@ -101,11 +98,9 @@ def main():
             elif event.type == KEYUP:
                 if event.key == K_UP or event.key == K_DOWN or event.key == K_RIGHT or event.key == K_LEFT:
                     pass
-        #screen.blit(background, (0, 0))
-        #gameboard.draw_board(screen)
+        # screen.blit(background, (0, 0))
+        # gameboard.draw_board(screen)
         pygame.display.flip()
-
-
 
 
 if __name__ == "__main__":
