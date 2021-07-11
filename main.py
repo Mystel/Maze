@@ -48,6 +48,10 @@ class GameBoard:
             # activate win state
             pass
 
+    def sonar(self):
+        pitch = self._board[self._player_pos[0]][self._player_pos[1]]
+        self._out.note_on(127 - (pitch * 5), 127)
+
     def draw_board(self, draw_screen):
         for row in range(12):
             for col in range(12):
@@ -92,11 +96,13 @@ def main():
                     gameboard.move(0, -1)
                 if event.key == K_RIGHT:
                     gameboard.move(0, 1)
+                if event.key == K_SPACE:
+                    gameboard.sonar()
             elif event.type == KEYUP:
                 if event.key == K_UP or event.key == K_DOWN or event.key == K_RIGHT or event.key == K_LEFT:
                     pass
-        screen.blit(background, (0, 0))
-        gameboard.draw_board(screen)
+        #screen.blit(background, (0, 0))
+        #gameboard.draw_board(screen)
         pygame.display.flip()
 
 
