@@ -23,6 +23,12 @@ class GameBoard:
         self._square_size = 10
         self._player_img = pygame.Rect(self._player_pos[1] * self._square_size,
                                        self._player_pos[0] * self._square_size, self._square_size, self._square_size)
+        # midi stuff
+        midi.init()
+        self._port = midi.get_default_output_id()
+        self._out = midi.Output(self._port, 0)
+        self._instrument = 0
+        self._out.set_instrument(self._instrument)
 
     def get_player_pos(self):
         return self._player_pos
@@ -36,6 +42,8 @@ class GameBoard:
         player_row, player_col = self.get_player_pos()
         if self._board[player_row + row][player_col + col] >= 0:
             self.set_player_pos(row, col)
+        else:
+            self._out.note_on(50, 90)
         if self._board[self._player_pos[0]][self._player_pos[1]] == 0:
             # activate win state
             pass
@@ -68,6 +76,8 @@ def main():
     # test - rectangle
     gameboard = GameBoard()
 
+
+
     # event loop
     while 1:
         for event in pygame.event.get():
@@ -88,6 +98,8 @@ def main():
         screen.blit(background, (0, 0))
         gameboard.draw_board(screen)
         pygame.display.flip()
+
+
 
 
 if __name__ == "__main__":
